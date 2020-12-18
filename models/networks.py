@@ -536,7 +536,7 @@ class UnetSkipConnectionBlock(nn.Module):
 
 
 def add_gaussian_noise(tensor, mean=0., std=0.1):
-    return tensor + torch.randn(tensor.size()) * std + mean
+    return tensor + (torch.randn(tensor.size()) * std + mean).to("cuda")
 
 
 class NLayerDiscriminator(nn.Module):
