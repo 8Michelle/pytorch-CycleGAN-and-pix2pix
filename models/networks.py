@@ -535,6 +535,10 @@ class UnetSkipConnectionBlock(nn.Module):
             return torch.cat([x, self.model(x)], 1)
 
 
+def add_gaussian_noise(tensor, mean=0., std=0.1):
+    return tensor + torch.randn(tensor.size()) * std + mean
+
+
 class NLayerDiscriminator(nn.Module):
     """Defines a PatchGAN discriminator"""
 
@@ -580,7 +584,7 @@ class NLayerDiscriminator(nn.Module):
 
     def forward(self, input):
         """Standard forward."""
-        return self.model(input)
+        return self.model(add_gaussian_noise(input))
 
 
 class PixelDiscriminator(nn.Module):
