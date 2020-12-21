@@ -569,7 +569,7 @@ class UnetSkipConnectionBlock(nn.Module):
             return torch.cat([x, self.model(x)], 1)
 
 
-def add_gaussian_noise(tensor, mean=0., std=0.1):
+def add_gaussian_noise(tensor, mean=0., std=1):
     return tensor + (torch.randn(tensor.size()) * std + mean).to("cuda")
 
 
